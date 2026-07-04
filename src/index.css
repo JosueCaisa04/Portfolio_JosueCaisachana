@@ -1,0 +1,72 @@
+@import url('https://fonts.googleapis.com/css2?family=Archivo+Black&family=Syne:wght@700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Archivo Black", sans-serif;
+  --font-syne: "Syne", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  
+  --color-brand-red: #FF3B3F;
+  --color-brand-gray-light: #F4F3F0;
+  --color-brand-black-deep: #0F0F10;
+  --color-brand-charcoal: #1C1C1E;
+}
+
+/* Custom glassmorphism, scrollbars, and premium cinematic styling utilities */
+html {
+  scroll-behavior: smooth;
+  background-color: #F4F3F0;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: #F4F3F0;
+  color: #0F0F10;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #F4F3F0;
+}
+::-webkit-scrollbar-thumb {
+  background: #1C1C1E;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #FF3B3F;
+}
+
+.text-gradient {
+  background: linear-gradient(135deg, #111111 30%, #444444 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.scarlet-glow {
+  box-shadow: 0 4px 20px -2px rgba(255, 59, 63, 0.4);
+}
+
+.brutalist-hover {
+  transition: all 180ms cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+
+

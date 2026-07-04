@@ -1,0 +1,6 @@
+{
+  "name": "Josue Caisachana Portfolio",
+  "description": "Premium cinematic portfolio and AI visual creations showcase for videomaker and video editor Josue Caisachana.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

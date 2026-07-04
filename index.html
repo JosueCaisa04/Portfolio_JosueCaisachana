@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Josue Caisachana | Digital Marketing Portfolio</title>
+    <script>
+      // Silence benign and expected Vite HMR WebSocket connection warnings/errors
+      window.addEventListener('unhandledrejection', function(event) {
+        if (event.reason && (
+          event.reason.message === 'WebSocket closed without opened.' ||
+          (typeof event.reason.message === 'string' && (
+            event.reason.message.toLowerCase().includes('websocket') ||
+            event.reason.message.toLowerCase().includes('vite')
+          ))
+        )) {
+          event.preventDefault();
+        }
+      });
+      window.addEventListener('error', function(event) {
+        if (event.message && (
+          event.message.toLowerCase().includes('websocket') ||
+          event.message.toLowerCase().includes('vite')
+        )) {
+          event.preventDefault();
+        }
+      });
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
+
