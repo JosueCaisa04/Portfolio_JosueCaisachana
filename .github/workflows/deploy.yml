@@ -1,0 +1,56 @@
+# Workflow GitHub Actions per il deployment automatico del portfolio su GitHub Pages
+name: Deploy di GitHub Pages
+
+on:
+  # Avvia il workflow ad ogni push sui branch main o master
+  push:
+    branches: ["main", "master"]
+
+  # Consente di avviare il workflow manualmente dalla scheda Actions di GitHub
+  workflow_dispatch:
+
+# Configura i permessi necessari per GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Impedisce l'esecuzione di più deployment contemporanei
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout del codice
+        uses: actions/checkout@v4
+
+      - name: Configura Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Installa le dipendenze
+        run: npm ci
+
+      - name: Compila il sito statico con Vite
+        run: npx vite build
+
+      - name: Configura GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Carica gli elementi compilati (dist)
+        uses: actions/upload-pages-artifact@v3
+        with:
+          # Carica solo la cartella 'dist' generata dal comando vite build
+          path: './dist'
+
+      - name: Pubblica su GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
