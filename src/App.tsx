@@ -54,7 +54,7 @@ function getProjectVideoSrc(url: string | undefined): string {
   const driveMatch = url.match(/(?:drive\.google\.com|docs\.google\.com|drive\.usercontent\.google\.com).*(?:id=|\/d\/)([a-zA-Z0-9_-]{25,50})/i);
   if (driveMatch) {
     const fileId = driveMatch[1];
-    return `/api/video-proxy?id=${fileId}`;
+    return `https://drive.google.com/uc?id=${fileId}`;
   }
   return url;
 }
@@ -62,11 +62,11 @@ function getProjectVideoSrc(url: string | undefined): string {
 function resolveAssetUrl(url: string | undefined): string {
   if (!url) return "";
 
-  // Support Google Drive image URLs directly by routing them through our virus-bypass server-side proxy
+  // Support Google Drive image URLs directly by using Google Drive public link format
   const driveMatch = url.match(/(?:drive\.google\.com|docs\.google\.com|drive\.usercontent\.google\.com).*(?:id=|\/d\/)([a-zA-Z0-9_-]{25,50})/i);
   if (driveMatch) {
     const fileId = driveMatch[1];
-    return `/api/video-proxy?id=${fileId}&type=image`;
+    return `https://drive.google.com/uc?id=${fileId}`;
   }
 
   if (url.startsWith("http://") || url.startsWith("https://") || url.startsWith("data:")) {
@@ -146,13 +146,13 @@ function ScrollReveal({ children, delay = 0, className = "", style = {} }: Scrol
 function getReelVideoSource(url: string, startTime?: number) {
   if (!url) return { type: "video" as const, src: "" };
 
-  // Google Drive detection (extracts file ID and converts to our custom server-side proxy URL)
+  // Google Drive detection (extracts file ID and converts to Google Drive direct URL)
   const driveMatch = url.match(/(?:drive\.google\.com\/(?:file\/d\/|open\?id=)|docs\.google\.com\/file\/d\/)([a-zA-Z0-9_-]{25,50})/i);
   if (driveMatch) {
     const fileId = driveMatch[1];
     return {
       type: "google-drive" as const,
-      src: `/api/video-proxy?id=${fileId}`
+      src: `https://drive.google.com/uc?id=${fileId}`
     };
   }
 
@@ -894,7 +894,7 @@ export default function App() {
 
             <a 
               id="cta-cv-download-nav"
-              href="/api/video-proxy?id=1sCegLRbbl3nvFEqdJrOAJ36tElIRor64&download=true"
+              href="https://drive.google.com/uc?export=download&id=1sCegLRbbl3nvFEqdJrOAJ36tElIRor64"
               className="relative px-4 py-2 overflow-hidden group rounded-none border border-[#0F0F10]/15 transition-all duration-300 hover:border-blue-500 bg-[#0F0F10]/[0.02]"
             >
               <div className="absolute inset-0 bg-blue-500/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300" />
@@ -977,7 +977,7 @@ export default function App() {
                 </a>
 
                 <a 
-                  href="/api/video-proxy?id=1sCegLRbbl3nvFEqdJrOAJ36tElIRor64&download=true"
+                  href="https://drive.google.com/uc?export=download&id=1sCegLRbbl3nvFEqdJrOAJ36tElIRor64"
                   onClick={() => setIsOpen(false)}
                   className="w-full text-center py-4 rounded-none bg-blue-500 hover:bg-blue-600 text-white font-bold tracking-widest text-sm uppercase flex items-center justify-center gap-2 transition-all duration-300 shadow-[4px_4px_0px_#0F0F10]"
                 >
@@ -1126,7 +1126,7 @@ export default function App() {
 
                 <a 
                   id="hero-cta-cv-download"
-                  href="/api/video-proxy?id=1sCegLRbbl3nvFEqdJrOAJ36tElIRor64&download=true"
+                  href="https://drive.google.com/uc?export=download&id=1sCegLRbbl3nvFEqdJrOAJ36tElIRor64"
                   className="group px-6 py-4 bg-white hover:bg-blue-500/5 text-[#0F0F10] hover:text-blue-600 font-extrabold tracking-widest text-[11px] uppercase border-2 border-black rounded-none shadow-[4px_4px_0px_#0F0F10] hover:shadow-none hover:translate-x-[4px] hover:translate-y-[4px] text-center transition-all duration-300"
                 >
                   <span className="flex items-center justify-center gap-2">
@@ -1819,7 +1819,7 @@ export default function App() {
             </motion.a>
 
             <motion.a
-              href="/api/video-proxy?id=1sCegLRbbl3nvFEqdJrOAJ36tElIRor64&download=true"
+              href="https://drive.google.com/uc?export=download&id=1sCegLRbbl3nvFEqdJrOAJ36tElIRor64"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
               className="w-full sm:w-auto group relative inline-flex items-center justify-center gap-4 py-5 px-8 bg-blue-500 hover:bg-[#0F0F10] text-white hover:text-white font-mono font-bold tracking-widest text-xs uppercase rounded-sm transition-all duration-300 shadow-[0_15px_45px_-12px_rgba(59,130,246,0.5)] border border-blue-500 hover:border-[#0F0F10] hover:shadow-[0_15px_45px_-12px_rgba(15,15,16,0.25)]"
